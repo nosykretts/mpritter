@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+const cors = require('cors')
 var express = require('express');
 var path = require('path');
 const mongoose = require('mongoose')
@@ -17,7 +17,11 @@ mongoose.Promise = global.Promise
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(
+  cors({
+    maxAge: 60 * 60 * 60 * 24,
+  })
+)
 
 app.use('/api', require('./routes/index'))
 

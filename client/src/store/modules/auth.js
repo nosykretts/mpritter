@@ -9,17 +9,17 @@ const getters = {
 }
 
 const actions = {
-  signin ({ commit }, { email, password, username }) {
+  signin ({ commit }, { email, password }) {
     return new Promise((resolve, reject) => {
       axios
         .post('/auth/signin', {
-          username,
           email,
           password
         })
         .then(({ data }) => {
           commit('signinSuccess', {
-            token: data.data.token
+            token: data.data.token,
+            userId: data.data.userId
           })
           resolve()
         })
@@ -29,20 +29,23 @@ const actions = {
         })
     })
   },
-  signup ({ commit }, { name, email, username, password }) {
-    axios
-      .post('/auth/signup', {
-        name,
-        username,
-        email,
-        password
-      })
-      .then(() => {
-        commit('signupSuccess')
-      })
-      .catch(err => {
-        console.log(err)
-      })
+  signup ({ commit }, { email, username, password }) {
+    return new Promise((resolve, reject) => {
+      axios
+        .post('/auth/signup', {
+          username,
+          email,
+          password
+        })
+        .then(() => {
+          commit('signupSuccess')
+          resolve()
+        })
+        .catch(err => {
+          console.log(err)
+          reject(err)
+        })
+    })
   },
   signout ({ commit }) {
     commit('signout')
@@ -50,14 +53,16 @@ const actions = {
 }
 
 const mutations = {
-  signinSuccess (state, { token }) {
+  signinSuccess (state, { token, userId }) {
     localStorage.setItem('token', `Bearer ${token}`)
+    localStorage.setItem('userId', userId)
     axios.defaults.headers.common.Authorization = `Bearer ${token}`
     state.isLoggedIn = true
   },
   signupSuccess (state) {},
   signout (state) {
     localStorage.removeItem('token')
+    localStorage.removeItem('userId')
     console.log(localStorage.getItem('token'))
     axios.defaults.headers.common.Authorization = 'Bearer jwt'
     state.isLoggedIn = false

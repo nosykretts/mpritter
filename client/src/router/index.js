@@ -6,7 +6,7 @@ import SignupPage from '@/components/SignupPage'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/',
@@ -25,3 +25,19 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(route => route.meta.requireAuth)) {
+    if (localStorage.getItem('token')) {
+      next()
+    } else {
+      next({ name: 'signin' })
+    }
+  } else if (to.name === 'signin' && localStorage.getItem('token')) {
+    next(false)
+  } else {
+    next()
+  }
+})
+
+export default router

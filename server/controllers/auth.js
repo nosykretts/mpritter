@@ -18,7 +18,7 @@ module.exports = {
               if (err) return next(boom.boomify(err))
               res.status(200).json({
                 message: 'Signin success',
-                data: { token }
+                data: { token, userId: user._id }
               })
             })
           } else {

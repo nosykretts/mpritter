@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-    <h1>ini homepeage</h1>
-    <!-- <tweet-list/> -->
+    <h1>Mpritter</h1>
+    <tweet-list/>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import TweetList from './TweetList'
 
 export default {
   name: 'HomePage',
-  props: { TweetList },
+  components: { TweetList },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

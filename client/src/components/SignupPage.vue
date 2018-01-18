@@ -25,7 +25,7 @@ export default {
           password: this.password
         })
         .then(() => {
-          this.$router.push({ name: 'homePage' })
+          this.$router.push({ name: 'signin' })
         })
     }
   }

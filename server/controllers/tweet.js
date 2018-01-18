@@ -6,6 +6,7 @@ module.exports = {
       tags: req.query.hastag
     } : {}
     ModelTweet.find(opt)
+      .sort({createdAt: 'desc'})
       .populate('creator')
       .then(tweets => {
         res.status(200).json({

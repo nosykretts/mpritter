@@ -18,6 +18,10 @@ let userSchema = new Schema(
       type: String,
       required: true,
       select: false
+    },
+    profileUrl: {
+      type: String,
+      default: 'https://ui-avatars.com/api/?name=John+Doe'
     }
   },
   {
