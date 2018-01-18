@@ -9,6 +9,11 @@ let userSchema = new Schema(
       required: true,
       lowercase: true
     },
+    email: {
+      type: String,
+      required: true,
+      lowercase: true
+    },
     password: {
       type: String,
       required: true,
