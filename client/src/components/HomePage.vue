@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
-    <tweet-list/>
+    <h1>ini homepeage</h1>
+    <!-- <tweet-list/> -->
   </div>
 </template>
 

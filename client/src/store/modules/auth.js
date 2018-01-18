@@ -1,5 +1,4 @@
 import axios from 'axios'
-import * as types from '../mutationTypes'
 
 const state = {
   isLoggedIn: localStorage.getItem('token') !== null
@@ -10,10 +9,11 @@ const getters = {
 }
 
 const actions = {
-  signin ({ commit }, { email, password }) {
+  signin ({ commit }, { email, password, username }) {
     return new Promise((resolve, reject) => {
       axios
         .post('/auth/signin', {
+          username,
           email,
           password
         })
@@ -45,7 +45,7 @@ const actions = {
       })
   },
   signout ({ commit }) {
-    commit(types.AUTH_SIGNOUT)
+    commit('signout')
   }
 }
 
