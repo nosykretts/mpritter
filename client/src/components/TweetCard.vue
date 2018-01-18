@@ -1,13 +1,14 @@
 <template>
   <el-card class="box-card">
     
-    <p><img :src="'https://ui-avatars.com/api/?name='+ tweet.creator.username"></p>
-    <p><strong>{{tweet.creator.username}}</strong></p>
+    <h3><img :src="'https://ui-avatars.com/api/?name='+ tweet.creator.username"></h3>
+    <h3><strong>{{tweet.creator.username}}</strong></h3>
     <p>{{tweet.content}}</p>
-    <el-button v-for="tag in tweet.tags" :key="tag" @click="getTweets(tag)">#{{tag}}</el-button>
+    <hr>
+    <el-button type="success" plain size="mini" v-for="tag in tweet.tags" :key="tag" @click="getTweets(tag)">#{{tag}}</el-button>
     <br>
     <hr>
-    <el-button v-if="tweet.canDelete" size="small" @click="deleteTweet(tweet._id)">Delete</el-button>
+    <el-button plain v-if="tweet.canDelete" size="mini" type="danger" @click="deleteTweet(tweet._id)">Delete</el-button>
   </el-card>
 </template>
 <script>

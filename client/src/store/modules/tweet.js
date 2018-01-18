@@ -55,7 +55,10 @@ const mutations = {
     state.tweets = tweets
   },
   createTweetSuccess (state, { tweet }) {
-    state.tweets = [tweet, ...state.tweets]
+    state.tweets = [
+      {...tweet, canDelete : true},
+      ...state.tweets
+    ]
   },
   deleteTweetSuccess (state, { id }) {
     state.tweets = state.tweets.filter(tweet => tweet._id !== id)
