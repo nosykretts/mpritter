@@ -2,10 +2,10 @@ const jwt = require('jsonwebtoken')
 
 
 module.exports = function(req, res, next) {
+  console.log('kesinis')
   const bearerToken = req.headers.authorization
   const token =
     bearerToken && bearerToken.split(' ')[1] ? bearerToken.split(' ')[1] : undefined
-
   if(!token){
     return res.status(403).json({
       message: 'token required'
